@@ -1,5 +1,6 @@
 // Import necessary packages
 import 'package:flutter/material.dart';
+import 'package:zensar_recipe_app/utils/constants.dart';
 import 'register_screen.dart';
 
 import 'login_screen.dart';
@@ -20,12 +21,12 @@ class WelcomeScreen extends StatelessWidget {
             Image.asset(
               'assets/images/food_img.png',
               height: 400,
-              width: 300,
+              width: 400,
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: 2.0),
 // Display the app title
             TitleText(),
-            SizedBox(height: 32.0),
+            SizedBox(height: 5.0),
 // Display the register and login buttons
             RegisterLoginButtons(),
           ],
@@ -45,13 +46,13 @@ class TitleText extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'Welcome to MealMaster!',
-          style: TextStyle(fontSize: 24.0),
+          kWelComeScreenTitle,
+          style: kWelcomeScreenTitleStyle,
         ),
         SizedBox(height: 8.0),
         Text(
-          'Your new recipe book',
-          style: TextStyle(fontSize: 18.0),
+          kWelcomeScreenSubTitle,
+          style: kWelcomeScreenSubTitleStyle,
         ),
       ],
     );
@@ -72,12 +73,12 @@ class RegisterLoginButtons extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamed(context, RegisterScreen.id);
           },
-          child: Text('Register'),
+          child: Text(kWelcomeScreenRegister,style: kWelcomeScreenButStyle,),
         ),
-        SizedBox(height: 16.0),
+        SizedBox(height: 10.0),
         Text(
-          'Already registered?',
-          style: TextStyle(fontSize: 16.0),
+          kWelcomeScreenRegisterAlready,
+          style: kWelcomeScreenSubTitleStyle
         ),
         SizedBox(height: 8.0),
 // Display the login button
@@ -85,8 +86,8 @@ class RegisterLoginButtons extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamed(context, LoginScreen.id);
           },
-          child: Text('Login'),
-        ),
+          child: Text(kWelcomeScreenLogin,style: kWelcomeScreenButStyle,
+        )),
       ],
     );
   }

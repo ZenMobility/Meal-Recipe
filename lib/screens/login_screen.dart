@@ -1,6 +1,7 @@
 // Importing necessary packages and files
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:zensar_recipe_app/utils/constants.dart';
 import 'home_screen.dart';
 
 // Stateful widget for the Login Screen
@@ -15,6 +16,9 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 // Firebase authentication instance
   final _auth = FirebaseAuth.instance;
+  var emailController = TextEditingController();
+  var passwdController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
 // Variables for user email, password and spinner visibility
   late String email;
@@ -25,111 +29,139 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: EdgeInsets.all(18.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
 // Login Screen title
-            Center(
-              child: Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 32.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-            SizedBox(height: 16.0),
-// Textfield for user email input
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Email',
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.emailAddress,
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                email = value;
-              },
-            ),
-            SizedBox(height: 16.0),
-// Textfield for user password input
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                border: OutlineInputBorder(),
-              ),
-              textAlign: TextAlign.center,
-              onChanged: (value) {
-                password = value;
-              },
-            ),
-            SizedBox(height: 16.0),
-// Elevated button for user to log in
-            ElevatedButton(
-              onPressed: () async {
-// Show spinner and clear error message
-                setState(() {
-                  showSpinner = true;
-                  errorMessage = '';
-                });
-                try {
-// Attempt to sign in user with email and password
-                  final userCredential = await _auth.signInWithEmailAndPassword(
-                      email: email, password: password);
-                  {
-// If successful, navigate to Home Screen
-                    User? user = userCredential.user;
-                    if (user != null) {
-                      print('Logged in as ${user.email}');
-                      Navigator.pushNamed(context, HomeScreen.id);
-                    }
-                  }
-// Hide spinner
-                  setState(() {
-                    showSpinner = false;
-                  });
-                } on FirebaseAuthException catch (e) {
-// Handle error if login attempt fails
-                  setState(() {
-                    showSpinner = false;
-                    if (e.code == 'wrong-password') {
-                      errorMessage = 'Incorrect password';
-                    } else {
-                      errorMessage =
-                          'Could not log in. Please try again later.';
-                    }
-                  });
-                } catch (e) {
-// Handle other errors
-                  setState(() {
-                    showSpinner = false;
-                    errorMessage = 'Could not log in. Please try again later.';
-                  });
-                }
-              },
-              child: Text('Log In'),
-            ),
-            SizedBox(height: 8.0),
-// Show spinner while user logs in
-            if (showSpinner)
               Center(
-                child: CircularProgressIndicator(),
-              ),
-// Show error message if login attempt fails
-            if (errorMessage.isNotEmpty)
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
-                  errorMessage,
-                  style: TextStyle(color: Colors.red),
-                  textAlign: TextAlign.center,
+                  kWelcomeScreenLogin,
+                  style: kLoginScreenTitleStyle,
                 ),
               ),
-          ],
+              SizedBox(height: 16.0),
+
+// Textfield for user email input
+              TextFormField(
+                controller: emailController,
+                decoration: InputDecoration(
+                  labelText: kLoginTextFieldEmail,
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter Username',
+                  icon: const Icon(Icons.email),
+                ),
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                onChanged: (value) {
+                  email = value;
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'User name cant be blank';
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(height: 16.0),
+            // Textfield for user password input
+              TextFormField(
+                  controller: passwdController,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                    labelText: kLoginTextFieldPassword,
+                    hintText: 'Enter password',
+                    icon: const Icon(Icons.lock),
+                    border: OutlineInputBorder(),
+                  ),
+                  textAlign: TextAlign.center,
+                  onChanged: (value) {
+                    password = value;
+                  },
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'email id cant be blank';
+                    }
+                    return null;
+                  }),
+              SizedBox(height: 16.0),
+// Elevated button for user to log in
+              SizedBox(
+                width: 200.0,
+                height: 60.0,
+                child: ElevatedButton(
+                  onPressed: () async {
+// Show spinner and clear error message
+                    try {
+                      if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          showSpinner = true;
+                          errorMessage = '';
+                        });
+                        var uname = emailController.text;
+                        var pwd = passwdController.text;
+                        // Attempt to sign in user with email and password
+                        final userCredential =
+                            await _auth.signInWithEmailAndPassword(
+                                email: email, password: password);
+                        {
+                          // If successful, navigate to Home Screen
+                          User? user = userCredential.user;
+                          if (user != null) {
+                            print('Logged in as ${user.email}');
+                            Navigator.pushNamed(context, HomeScreen.id);
+                          }
+                        }
+                        // Hide spinner
+                        setState(() {
+                          showSpinner = false;
+                        });
+                      }
+                    } on FirebaseAuthException catch (e) {
+                      // Handle error if login attempt fails
+                      setState(() {
+                        showSpinner = false;
+                        if (e.code == 'wrong-password') {
+                          errorMessage = 'Incorrect password';
+                        } else {
+                          errorMessage =
+                              'Could not log in. Please try again later.';
+                        }
+                      });
+                    } catch (e) {
+                    // Handle other errors
+                      setState(() {
+                        showSpinner = false;
+                        errorMessage =
+                            'Could not log in. Please try again later.';
+                      });
+                    }
+                  },
+                  child: Text(kLoginScreenButon,style: kLoginScreenButStyle,),
+                ),
+              ),
+              SizedBox(height: 8.0),
+              // Show spinner while user logs in
+              if (showSpinner)
+                Center(
+                  child: CircularProgressIndicator(),
+                ),
+              // Show error message if login attempt fails
+              if (errorMessage.isNotEmpty)
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    errorMessage,
+                    style: TextStyle(color: Colors.red),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
