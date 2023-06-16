@@ -10,9 +10,33 @@ const String kWelcomeScreenLogin = 'Login';
 const String kLoginTextFieldEmail = 'Email';
 const String kLoginTextFieldPassword = 'Password';
 const String kLoginScreenButon = 'Log In';
+const String kSettingsScreenDrkMode = 'Dark mode';
+const String kSettingsScreenTitle ='Settings';
+const String kSettingsScreenAppearanceTxt ='Appearance';
+const String kSettingsPrivacyPolicy='Privacy Policy';
+const String kSettingsLicense='License';
+const String kSettingsLogout = 'Log Out';
+const String kFavouriteRecipeText =  'Favorites Recipes';
+const String kFavouriteRecipeSubText =  'Find Your Favorites Here !';
+const String kNoFavouriteRecipeText =  'No favorite recipes';
+const String kRandomMealText =  'Random Meal';
+const String kSettingsText =  'Settings';
+const String kSearchScreenText =  'Find Your Meals Randomly';
+const String kSearchForaMealText =  'Search for a meal!';
+const String kSearchNoMeal =  'No results found.';
+
+
+
 const kBrightness = Brightness.light;
 const kOrange = Colors.orange;
 const kDark = Brightness.dark;
+
+/// <eal DB URl's
+const String kMealsRandomItem = 'https://www.themealdb.com/api/json/v1/1/random.php';
+const String kMealsSearchByQuery = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+const String kDummyLicense ='https://example.com/license';
+const String kDummyPrivacyPolicy ='https://example.com/privacy-policy';
+
 
 const kWelcomeScreenTitleStyle = TextStyle(
     fontSize: 24.0, color: Colors.lightBlue, fontWeight: FontWeight.bold);
@@ -27,7 +51,16 @@ const kLoginScreenTitleStyle = TextStyle(
 );
 const kLoginScreenButStyle =
 TextStyle(fontSize: 20.0, color: Colors.white, fontWeight: FontWeight.bold);
-//TextStyle(fontSize: 22.0, color: Color(0xFF81838E));
+
+const kFavouriteScreenTitleStyle = TextStyle(
+    fontSize: 30, color: Colors.black, fontWeight: FontWeight.bold);
+
+const kFavoriteScreenSubTitleStyle = TextStyle(
+    fontSize: 25.0,
+    color: Colors.blueGrey,
+    fontWeight: FontWeight.bold,
+    fontStyle: FontStyle.italic
+);
 
 const kTextFieldDecoration = InputDecoration(
 // Set a default hint text

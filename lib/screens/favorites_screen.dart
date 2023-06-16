@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:zensar_recipe_app/utils/constants.dart';
 import 'dart:convert';
 import 'recipe_screen.dart';
 import 'package:zensar_recipe_app/components/navbar.dart';
-import 'home_screen.dart';
+import 'search_screen.dart';
 import 'settings_screen.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 
@@ -66,7 +67,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   Future<dynamic> _getRecipe(String recipeName) async {
     final url =
-        'https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeName.replaceAll(' ', '%20')}';
+        kMealsSearchByQuery+'${recipeName.replaceAll(' ', '%20')}';
     final response = await http.get(Uri.parse(url));
     final data = jsonDecode(response.body);
     return data['meals'][0];
@@ -89,6 +90,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title:const Text(kFavouriteRecipeText,style: kFavouriteScreenTitleStyle), automaticallyImplyLeading: false,),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,41 +98,48 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-              child: Text(
-                'Favorite Recipes',
-                style: TextStyle(
-                  fontSize: 32.0,
-                  fontWeight: FontWeight.bold,
+              child: Card(
+                elevation: 5,
+                shadowColor: Colors.amber,
+                color: Colors.white,
+                child: Text(
+                  kFavouriteRecipeSubText,
+                  style: kFavoriteScreenSubTitleStyle,
                 ),
               ),
             ),Expanded(
   child: _favoriteRecipes.isEmpty
       ? Center(
-          child: Text('No favorite recipes'),
+          child: Text(kNoFavouriteRecipeText),
         )
       : ListView.builder(
           itemCount: _favoriteRecipes.length,
           itemBuilder: (BuildContext context, int index) {
             final recipeName = _favoriteRecipes[index];
-            return ListTile(
-              title: Text(recipeName),
-              trailing: IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () {
-                  _removeFavoriteRecipe(index);
-                },
-              ),
-                              onTap: () async {
-                                final recipe = await _getRecipe(recipeName);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        RecipeScreen(recipe: recipe),
-                                  ),
-                                );
-                              },
-                            );
+            return Card(
+              elevation: 15,
+              shadowColor: Colors.amber,
+              color: Colors.white,
+              child: ListTile(
+                title: Text(recipeName,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.grey),),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete_rounded),
+                  onPressed: () {
+                    _removeFavoriteRecipe(index);
+                  },
+                ),
+                                onTap: () async {
+                                  final recipe = await _getRecipe(recipeName);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          RecipeScreen(recipe: recipe),
+                                    ),
+                                  );
+                                },
+                              ),
+            );
                           },
                         ),
             ),
@@ -141,7 +150,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         selectedIndex: 1,
         onItemTapped: (index) {
           if (index == 0) {
-            Navigator.pushReplacementNamed(context, HomeScreen.id);
+            Navigator.pushReplacementNamed(context, SearchScreen.id);
           } else if (index == 2) {
             Navigator.pushNamed(context, SettingsScreen.id);
           }

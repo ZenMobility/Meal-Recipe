@@ -1,26 +1,28 @@
 // Import required libraries
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:zensar_recipe_app/utils/constants.dart';
 import 'recipe_screen.dart';
 import 'favorites_screen.dart';
 import 'settings_screen.dart';
 import 'package:zensar_recipe_app/components//navbar.dart';
 
-class HomeScreen extends StatefulWidget {
+class SearchScreen extends StatefulWidget {
   static const String id = 'home_screen';
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _SearchScreenState extends State<SearchScreen> {
   List<dynamic>? _recipes;
 
 // Method to search recipes based on a query
   Future<void> _searchRecipes(String query) async {
     final response = await http.get(Uri.parse(
-        'https://www.themealdb.com/api/json/v1/1/search.php?s=$query'));
+        kMealsSearchByQuery+'$query'));
 
     if (response.statusCode == 200) {
       setState(() {
@@ -34,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 // Method to navigate to a random recipe
   Future<void> _navigateToRandomRecipe() async {
     final response = await http
-        .get(Uri.parse('https://www.themealdb.com/api/json/v1/1/random.php'));
+        .get(Uri.parse(kMealsRandomItem));
 
     if (response.statusCode == 200) {
       final randomRecipe = json.decode(response.body)['meals'][0];
@@ -59,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _selectedIndex = index;
     });
     if (_selectedIndex == 0) {
-      Navigator.pushReplacementNamed(context, HomeScreen.id);
+      Navigator.pushReplacementNamed(context, SearchScreen.id);
     } else if (_selectedIndex == 1) {
       Navigator.pushNamed(context, FavoritesScreen.id);
     } else if (_selectedIndex == 2) {
@@ -71,6 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title:const Text(kSearchScreenText,style: kFavouriteScreenTitleStyle), automaticallyImplyLeading: false,),
       body: Column(
         children: [
           Container(
@@ -78,8 +81,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               children: [
                 Text(
-                  'What to eat today?',
+                  'Search your tasty food !',
                   style: TextStyle(
+                    color: Colors.blueGrey,
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -88,8 +92,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 TextField(
                   onSubmitted: _searchRecipes,
                   decoration: InputDecoration(
-                    hintText: 'Search meals, ingredient, or category',
-                    prefixIcon: Icon(Icons.search),
+                    hintText: 'Search any meals, ingredient, or category',
+                    prefixIcon: Icon(FontAwesomeIcons.searchengin),
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -99,9 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
 // Recipe list
           Expanded(
             child: _recipes == null
-                ? Center(child: Text('Search for a meal!'))
+                ? Center(child: Text(kSearchForaMealText))
                 : _recipes!.isEmpty
-                    ? Center(child: Text('No results found.'))
+                    ? Center(child: Text(kSearchNoMeal))
                     : ListView.builder(
                         itemCount: _recipes!.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -114,11 +118,19 @@ class _HomeScreenState extends State<HomeScreen> {
       // Floating action button for random recipe
       floatingActionButton: ElevatedButton(
         onPressed: _navigateToRandomRecipe,
+        style: ElevatedButton.styleFrom(
+          elevation: 50,
+          primary: Colors.transparent,
+          onPrimary: Colors.amber,
+          side: BorderSide(color: Colors.lightBlueAccent, width: 5),
+        ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
           child: Text(
-            'Random meal',
-            style: TextStyle(fontSize: 18.0),
+            kRandomMealText,
+
+            style: TextStyle(fontSize: 21.0, fontWeight: FontWeight.bold,color:
+            Colors.amber),
           ),
         ),
       ),

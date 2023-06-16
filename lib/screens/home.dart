@@ -4,7 +4,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 
 import 'favorites_screen.dart';
-import 'home_screen.dart';
+import 'search_screen.dart';
 import 'login_screen.dart';
 import 'recipe_screen.dart';
 import 'register_screen.dart';
@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
           WelcomeScreen.id: (context) => WelcomeScreen(),
           LoginScreen.id: (context) => LoginScreen(),
           RegisterScreen.id: (context) => RegisterScreen(),
-          HomeScreen.id: (context) => HomeScreen(),
+          SearchScreen.id: (context) => SearchScreen(),
           RecipeScreen.id: (context) => RecipeScreen(
               recipe: ModalRoute.of(context)!.settings.arguments as dynamic),
           SettingsScreen.id: (context) => SettingsScreen(),

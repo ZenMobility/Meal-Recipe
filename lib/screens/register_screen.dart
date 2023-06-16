@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
-import 'home_screen.dart';
+import 'search_screen.dart';
 
 // RegisterScreen class, extends StatefulWidget
 class RegisterScreen extends StatefulWidget {
@@ -107,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         await _auth.createUserWithEmailAndPassword(
                             email: email, password: password);
                     // Navigate to HomeScreen
-                        Navigator.pushNamed(context, HomeScreen.id);
+                        Navigator.pushNamed(context, SearchScreen.id);
                       }
 
                     } on FirebaseAuthException catch (e) {

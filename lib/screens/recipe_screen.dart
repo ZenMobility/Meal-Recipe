@@ -4,7 +4,7 @@ import 'settings_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zensar_recipe_app/components//navbar.dart';
 import 'favorites_screen.dart';
-import 'home_screen.dart';
+import 'search_screen.dart';
 
 class RecipeScreen extends StatefulWidget {
 static const String id = 'recipe_screen';
@@ -62,7 +62,7 @@ setState(() {
 _selectedIndex = index;
 });
 if (index == 0) {
-Navigator.pushNamed(context, HomeScreen.id);
+Navigator.pushNamed(context, SearchScreen.id);
 } else if (index == 1) {
 Navigator.pushNamed(context, FavoritesScreen.id);
 } else if (index == 2) {

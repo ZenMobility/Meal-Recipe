@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
-import 'home_screen.dart';
+import 'search_screen.dart';
 
 // Stateful widget for the Login Screen
 class LoginScreen extends StatefulWidget {
@@ -113,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           User? user = userCredential.user;
                           if (user != null) {
                             print('Logged in as ${user.email}');
-                            Navigator.pushNamed(context, HomeScreen.id);
+                            Navigator.pushNamed(context, SearchScreen.id);
                           }
                         }
                         // Hide spinner
