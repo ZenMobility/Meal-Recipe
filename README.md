@@ -1,4 +1,4 @@
-## Author : Shrishailkumar Maddaraki, Emp ID Zensar: 64254
+## Author : Shrishailkumar Maddaraki
 # zensar_recipe_app
 
 A Meals Recipe app which will allow user to traverse though list of menus items based on regios and add items to favourite's, search a food item.
