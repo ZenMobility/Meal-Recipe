@@ -24,6 +24,12 @@ const String kSettingsText =  'Settings';
 const String kSearchScreenText =  'Find Your Meals Randomly';
 const String kSearchForaMealText =  'Search for a meal!';
 const String kSearchNoMeal =  'No results found.';
+const String kLoginErrorFirbasePW =  'Incorrect password';
+const String kLoginErrorFirbase =  'Could not log in. Please try again later.';
+const String kUserNameBlankErr = 'User name cant be blank';
+const String kUserEmailIdBlankErr = 'email id cant be blank';
+const String kPwBlankHint = 'Enter password';
+const String kUserNameBlankHint = 'Enter User Name';
 
 
 

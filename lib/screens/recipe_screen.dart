@@ -1,4 +1,3 @@
-// Import necessary packages and screens
 import 'package:flutter/material.dart';
 import 'settings_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';

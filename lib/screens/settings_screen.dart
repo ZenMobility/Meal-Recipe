@@ -1,4 +1,3 @@
-// Import necessary packages
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:zensar_recipe_app/components/navbar.dart';
@@ -7,7 +6,6 @@ import 'favorites_screen.dart';
 import 'search_screen.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
-// Define a stateful widget for the settings screen
 class SettingsScreen extends StatefulWidget {
   static const String id = 'settings_screen';
 

@@ -1,7 +1,5 @@
-// Import necessary packages
 import 'package:flutter/material.dart';
 
-// Define a custom rounded button widget
 class RoundedButton extends StatelessWidget {
 // Define variables to keep track of the button's title, color, and onPressed function
   final String title;

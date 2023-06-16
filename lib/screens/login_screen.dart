@@ -1,10 +1,8 @@
-// Importing necessary packages and files
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 import 'search_screen.dart';
 
-// Stateful widget for the Login Screen
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
 
@@ -12,7 +10,6 @@ class LoginScreen extends StatefulWidget {
   _LoginScreenState createState() => _LoginScreenState();
 }
 
-// State class for the Login Screen widget
 class _LoginScreenState extends State<LoginScreen> {
 // Firebase authentication instance
   final _auth = FirebaseAuth.instance;
@@ -52,7 +49,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: InputDecoration(
                   labelText: kLoginTextFieldEmail,
                   border: OutlineInputBorder(),
-                  hintText: 'Enter Username',
+                  hintText: kUserNameBlankHint,
                   icon: const Icon(Icons.email),
                 ),
                 keyboardType: TextInputType.emailAddress,
@@ -62,7 +59,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'User name cant be blank';
+                    return kUserNameBlankErr;
                   }
                   return null;
                 },
@@ -74,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: kLoginTextFieldPassword,
-                    hintText: 'Enter password',
+                    hintText: kPwBlankHint,
                     icon: const Icon(Icons.lock),
                     border: OutlineInputBorder(),
                   ),
@@ -84,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'email id cant be blank';
+                      return kUserEmailIdBlankErr;
                     }
                     return null;
                   }),
@@ -126,10 +123,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       setState(() {
                         showSpinner = false;
                         if (e.code == 'wrong-password') {
-                          errorMessage = 'Incorrect password';
+                          errorMessage = kLoginErrorFirbasePW;
                         } else {
                           errorMessage =
-                              'Could not log in. Please try again later.';
+                              kLoginErrorFirbase;
                         }
                       });
                     } catch (e) {
@@ -137,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       setState(() {
                         showSpinner = false;
                         errorMessage =
-                            'Could not log in. Please try again later.';
+                            kLoginErrorFirbase;
                       });
                     }
                   },

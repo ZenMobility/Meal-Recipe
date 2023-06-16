@@ -5,9 +5,7 @@ import 'package:zensar_recipe_app/screens/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-// Main function
 void main() async {
-// Ensure that Flutter is initialized and Firebase is ready
   WidgetsFlutterBinding.ensureInitialized();
   Platform.isAndroid?  await Firebase.initializeApp(
     options: FirebaseOptions(

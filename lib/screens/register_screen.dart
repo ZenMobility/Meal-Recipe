@@ -1,16 +1,13 @@
-// Import required libraries
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 import 'search_screen.dart';
 
-// RegisterScreen class, extends StatefulWidget
 class RegisterScreen extends StatefulWidget {
   static const String id = 'register_screen';
 
 
-// Override createState method, returns _RegisterScreenState object
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
 }

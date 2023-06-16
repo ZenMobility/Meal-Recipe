@@ -1,7 +1,5 @@
-// Import necessary packages
 import 'package:flutter/material.dart';
 
-// Define a custom bottom navigation bar widget
 class CustomBottomNavigationBar extends StatelessWidget {
 // Define variables to keep track of selected index and onItemTapped function
   final int selectedIndex;
@@ -18,7 +16,6 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-// Define the items to be displayed on the bottom navigation bar
       items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

@@ -1,15 +1,12 @@
-// Import necessary packages
 import 'package:flutter/material.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 import 'register_screen.dart';
 
 import 'login_screen.dart';
 
-// Define the welcome screen stateless widget
 class WelcomeScreen extends StatelessWidget {
   static const String id = 'welcome_screen';
 
-// Build the welcome screen widget
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +60,6 @@ class TitleText extends StatelessWidget {
 class RegisterLoginButtons extends StatelessWidget {
   const RegisterLoginButtons({Key? key}) : super(key: key);
 
-// Build the register and login buttons widget
   @override
   Widget build(BuildContext context) {
     return Column(
