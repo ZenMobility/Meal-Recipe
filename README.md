@@ -13,7 +13,7 @@ A Meals Recipe app which will allow user to traverse though list of menus items 
 
 ## Screen Shots
 
-<img src="https://github.com/ZenMobility/Shrishail_Meal-Recipe/assets/110816698/b7038110-88b1-454f-b127-d3e78d2b1504" width="220" height="400">
+<img src="https://github.com/ZenMobility/Shrishail_Meal-Recipe/assets/110816698/86f35232-215d-461f-ab70-15f7815a3084" width="220" height="400">
 <img src="https://github.com/ZenMobility/Shrishail_Meal-Recipe/assets/110816698/75ba915d-bfd1-4a76-afe1-d3773c61f238" width="220" height="400">
 <img src="https://github.com/ZenMobility/Shrishail_Meal-Recipe/assets/110816698/9108a49f-9956-4ec5-9037-64da5417caf3" width="220" height="400">
 <img src="https://github.com/ZenMobility/Shrishail_Meal-Recipe/assets/110816698/73781337-07b2-4702-a630-a77e3823cb05" width="220" height="400">
