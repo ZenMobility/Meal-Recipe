@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:zensar_recipe_app/components/navbar.dart';
+import 'package:zensar_recipe_app/routes/routes.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 import 'favorites_screen.dart';
 import 'search_screen.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
 class SettingsScreen extends StatefulWidget {
-  static const String id = 'settings_screen';
+  static const String id = '/settings_screen';
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
@@ -24,17 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 // Display screen title
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
-            child: Text(
-              kSettingsScreenDrkMode,
-              style: TextStyle(
-                fontSize: 32.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
+
           // Display appearance options
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -43,25 +34,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 Text(
                   kSettingsScreenAppearanceTxt,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 16.0),
               // Display dark mode switch
-                ListTile(
-                  title: Text(kSettingsScreenDrkMode),
-                  trailing: Switch(
-                    value: AdaptiveTheme.of(context).mode ==
-                        AdaptiveThemeMode.dark,
-                    onChanged: (value) {
-                      if (value) {
-                        AdaptiveTheme.of(context).setDark();
-                      } else {
-                        AdaptiveTheme.of(context).setLight();
-                      }
-                    },
-                  ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+
+                  children: [
+                    Text(kSettingsScreenDrkMode,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+                    SizedBox(width:100,
+                      child: Switch(
+                        value: AdaptiveTheme.of(context).mode ==
+                            AdaptiveThemeMode.dark,
+                        onChanged: (value) {
+                          if (value) {
+                            AdaptiveTheme.of(context).setDark();
+                          } else {
+                            AdaptiveTheme.of(context).setLight();
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: 5.0),
               ],
             ),
           ),
@@ -71,14 +69,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Legal',
-                  style: Theme.of(context).textTheme.titleLarge,
+                Text(kLegalTxt,style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 16.0),
         // Display button to privacy policy
                 ElevatedButton(
-                  child: Text(kSettingsPrivacyPolicy),
+                  child: Text(kSettingsPrivacyPolicy,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
                   onPressed: () async {
                     const url = kDummyPrivacyPolicy;
                     if (await canLaunchUrl(Uri.parse(url))) {
@@ -91,7 +87,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 SizedBox(height: 8.0),
 // Display button to license
                 ElevatedButton(
-                  child: Text(kSettingsLicense),
+                  child: Text(kSettingsLicense,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                   onPressed: () async {
                     const url = kDummyLicense;
                     if (await canLaunchUrl(Uri.parse(url))) {
@@ -104,7 +100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 SizedBox(height: 8.0),
 // Display button to log out
                 ElevatedButton(
-                  child: Text(kSettingsLogout),
+                  child: Text(kSettingsLogout,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                   onPressed: () {
                     Navigator.popUntil(context, (route) => route.isFirst);
                   },
@@ -116,12 +112,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
 // Display the bottom navigation bar
       bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: 2,
+        selectedIndex: 3,
         onItemTapped: (index) {
           if (index == 0) {
-            Navigator.pushReplacementNamed(context, SearchScreen.id);
+            Navigator.pushReplacementNamed(context, Routes.category);
           } else if (index == 1) {
-            Navigator.pushReplacementNamed(context, FavoritesScreen.id);
+            Navigator.pushReplacementNamed(context, Routes.search);
+          }else if (index == 2) {
+            Navigator.pushReplacementNamed(context, Routes.favorites);
           }
         },
       ),

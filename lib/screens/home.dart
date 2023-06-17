@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:zensar_recipe_app/routes/routes.dart';
+import 'package:zensar_recipe_app/screens/category_screen.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 
 import 'favorites_screen.dart';
@@ -18,30 +20,45 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return AdaptiveTheme(
       light: ThemeData(
+        appBarTheme: AppBarTheme(
+          color: Colors.amber,
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+        ),
         brightness: kBrightness,
         primarySwatch: kOrange,
       ),
       dark: ThemeData(
+        appBarTheme: AppBarTheme(
+          color: Colors.amberAccent.shade100,
+          iconTheme: IconThemeData(
+            color: Colors.white,
+          ),
+        ),
         brightness: kDark,
         primarySwatch: kOrange,
       ),
-      initial: AdaptiveThemeMode.light, // Setting the initial theme mode to light
+      initial: AdaptiveThemeMode.light,
+      // Setting the initial theme mode to light
       builder: (theme, darkTheme) => MaterialApp(
         title: kAppTitle,
         theme: theme,
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
-        initialRoute: WelcomeScreen.id, // Setting the initial route to the welcome screen
+        initialRoute: Routes.welcome,
+        // Setting the initial route to the welcome screen
         routes: {
 // routes for each screen
-          WelcomeScreen.id: (context) => WelcomeScreen(),
-          LoginScreen.id: (context) => LoginScreen(),
-          RegisterScreen.id: (context) => RegisterScreen(),
-          SearchScreen.id: (context) => SearchScreen(),
-          RecipeScreen.id: (context) => RecipeScreen(
+          Routes.category: (context) => CategoryScreen(),
+          Routes.welcome: (context) => WelcomeScreen(),
+          Routes.login: (context) => LoginScreen(),
+          Routes.register: (context) => RegisterScreen(),
+          Routes.search: (context) => SearchScreen(),
+          Routes.recipe: (context) => RecipeScreen(
               recipe: ModalRoute.of(context)!.settings.arguments as dynamic),
-          SettingsScreen.id: (context) => SettingsScreen(),
-          FavoritesScreen.id: (context) => FavoritesScreen(),
+          Routes.settngs: (context) => SettingsScreen(),
+          Routes.favorites: (context) => FavoritesScreen(),
         },
       ),
     );

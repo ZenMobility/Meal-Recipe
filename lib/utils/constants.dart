@@ -30,7 +30,14 @@ const String kUserNameBlankErr = 'User name cant be blank';
 const String kUserEmailIdBlankErr = 'email id cant be blank';
 const String kPwBlankHint = 'Enter password';
 const String kUserNameBlankHint = 'Enter User Name';
-
+const String kLegalTxt = 'Legal';
+const String kSearchSubTitle ='Search your tasty food!';
+const String kSearchHintTxt = 'Search any meals, ingredient, or category';
+const String kCategoryTitle = "Category Menu";
+const String kBottomNavCatTitle= "Categories";
+const String kBottomNavFavTitle= "Favorites";
+const String kBottomNavSearchTitle= "Search";
+const String kBottomNavSettingsTitle= "Settings";
 
 
 const kBrightness = Brightness.light;
@@ -38,6 +45,7 @@ const kOrange = Colors.orange;
 const kDark = Brightness.dark;
 
 /// <eal DB URl's
+const String kMealsCategories ='https://www.themealdb.com/api/json/v1/1/categories.php';
 const String kMealsRandomItem = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const String kMealsSearchByQuery = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
 const String kDummyLicense ='https://example.com/license';
@@ -65,7 +73,7 @@ const kFavoriteScreenSubTitleStyle = TextStyle(
     fontSize: 25.0,
     color: Colors.blueGrey,
     fontWeight: FontWeight.bold,
-    fontStyle: FontStyle.italic
+    fontStyle: FontStyle.normal
 );
 
 const kTextFieldDecoration = InputDecoration(

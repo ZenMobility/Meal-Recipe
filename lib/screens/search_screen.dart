@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
+import 'package:zensar_recipe_app/routes/routes.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 import 'recipe_screen.dart';
 import 'favorites_screen.dart';
@@ -9,7 +10,7 @@ import 'settings_screen.dart';
 import 'package:zensar_recipe_app/components//navbar.dart';
 
 class SearchScreen extends StatefulWidget {
-  static const String id = 'home_screen';
+  static const String id = '/search_screen';
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
@@ -41,7 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
       final randomRecipe = json.decode(response.body)['meals'][0];
       Navigator.pushNamed(
         context,
-        RecipeScreen.id,
+        Routes.recipe,
         arguments: randomRecipe,
       );
     } else {
@@ -51,6 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   int _selectedIndex = 0;
 
+/*
 // Method to handle bottom navigation bar item tap
   void _onItemTapped(int index) {
     if (index == _selectedIndex) {
@@ -59,14 +61,16 @@ class _SearchScreenState extends State<SearchScreen> {
     setState(() {
       _selectedIndex = index;
     });
+
     if (_selectedIndex == 0) {
-      Navigator.pushReplacementNamed(context, SearchScreen.id);
-    } else if (_selectedIndex == 1) {
-      Navigator.pushNamed(context, FavoritesScreen.id);
+      Navigator.pushReplacementNamed(context, Routes.category);
     } else if (_selectedIndex == 2) {
-      Navigator.pushNamed(context, SettingsScreen.id);
+      Navigator.pushNamed(context, Routes.favorites);
+    }else if (_selectedIndex == 3) {
+      Navigator.pushNamed(context, Routes.settngs);
     }
   }
+*/
 
 // Override build method, returns a Scaffold widget
   @override
@@ -80,18 +84,19 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
               children: [
                 Text(
-                  'Search your tasty food !',
+                  kSearchSubTitle,
                   style: TextStyle(
-                    color: Colors.blueGrey,
-                    fontSize: 24.0,
+                    color: Colors.grey.shade300,
+                    fontSize: 25.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 20,),
                 TextField(
                   onSubmitted: _searchRecipes,
                   decoration: InputDecoration(
-                    hintText: 'Search any meals, ingredient, or category',
+                    hintStyle:TextStyle(fontSize:16,color: Colors.grey.shade300,fontWeight: FontWeight.bold) ,
+                    hintText: kSearchHintTxt,
                     prefixIcon: Icon(FontAwesomeIcons.searchengin),
                     border: OutlineInputBorder(),
                   ),
@@ -134,8 +139,16 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
+        selectedIndex: 1,
+        onItemTapped: (index) {
+          if (index == 0) {
+            Navigator.pushReplacementNamed(context, Routes.category);
+          } else if (index == 2) {
+            Navigator.pushNamed(context, Routes.favorites);
+          } else if (index == 3) {
+            Navigator.pushNamed(context, Routes.settngs);
+          }
+        },
       ),
     );
   }

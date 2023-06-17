@@ -1,10 +1,15 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:zensar_recipe_app/routes/routes.dart';
+import 'package:zensar_recipe_app/screens/category_screen.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 import 'search_screen.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
-  static const String id = 'login_screen';
+  static const String id = '/login_screen';
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -12,6 +17,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
 // Firebase authentication instance
+  List<dynamic>? _categorydata;
+
   final _auth = FirebaseAuth.instance;
   var emailController = TextEditingController();
   var passwdController = TextEditingController();
@@ -110,7 +117,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           User? user = userCredential.user;
                           if (user != null) {
                             print('Logged in as ${user.email}');
-                            Navigator.pushNamed(context, SearchScreen.id);
+                            //before call to category screen fetch the api data and send it to Category screen
+                            Navigator.pushNamed(context, Routes.category);
                           }
                         }
                         // Hide spinner

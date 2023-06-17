@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:zensar_recipe_app/routes/routes.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 import 'register_screen.dart';
 
 import 'login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  static const String id = 'welcome_screen';
+  static const String id = '/welcome_screen';
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,7 @@ class RegisterLoginButtons extends StatelessWidget {
 // Display the register button
         ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, RegisterScreen.id);
+            Navigator.pushNamed(context, Routes.register);
           },
           child: Text(kWelcomeScreenRegister,style: kWelcomeScreenButStyle,),
         ),
@@ -80,7 +81,7 @@ class RegisterLoginButtons extends StatelessWidget {
 // Display the login button
         ElevatedButton(
           onPressed: () {
-            Navigator.pushNamed(context, LoginScreen.id);
+            Navigator.pushNamed(context, Routes.login);
           },
           child: Text(kWelcomeScreenLogin,style: kWelcomeScreenButStyle,
         )),
