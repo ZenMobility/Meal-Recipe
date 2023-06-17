@@ -55,40 +55,43 @@ class _CategoryScreenState extends State<CategoryScreen> {
             : GridView.count(
                 crossAxisCount: 2,
                 shrinkWrap: true,
-                children: _categorydata!.map<Widget>((product) {
+                children: _categorydata!.map<Widget>((mealsCat) {
                   //meals list map to loop over the list
-                  return Card(
-                      elevation: 5, //shadow elevation for card
-                      margin: EdgeInsets.all(2),
-                      child: Container(
-                        color: Colors.white60,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          //main axix alignemnt to center
-                          children: <Widget>[
-                            SizedBox(
-                              width: 200,
-                              height: 200,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(product['strCategory'],
-                                      style: const TextStyle(
-                                          fontSize: 22.0,
-                                          fontWeight: FontWeight.bold,
-                                          fontStyle: FontStyle.italic)),
-                                  Image.network(product['strCategoryThumb'],
-                                      width: 150, height: 150),
-                                  /*  Text(
-                              '₹ ${product.strCategoryThumb}',
-                              style: const TextStyle(fontSize: 18.0),
-                            ),*/
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ));
+                  return GestureDetector(
+                    child: Card(
+                        elevation: 5, //shadow elevation for card
+                        margin: EdgeInsets.all(2),
+                        child: Container(
+                          color: Colors.grey.shade50,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            //main axix alignemnt to center
+                            children: <Widget>[
+                              SizedBox(
+                                width: 200,
+                                height: 200,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(mealsCat['strCategory'],
+                                        style: const TextStyle(
+                                            fontSize: 22.0,
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle: FontStyle.italic)),
+                                    Image.network(mealsCat['strCategoryThumb'],
+                                        width: 150, height: 150),
+                                    /*  Text(
+                                '₹ ${product.strCategoryThumb}',
+                                style: const TextStyle(fontSize: 18.0),
+                              ),*/
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        )),
+                      onTap: () => onCategorySelect(mealsCat['strCategory']),
+                  );
                 }).toList(),
               ),
         bottomNavigationBar: CustomBottomNavigationBar(
@@ -119,5 +122,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
       throw Exception('Failed to search recipes');
     }
     return cats;
+  }
+
+  onCategorySelect(mealsCategory) {
+    Navigator.pushNamed(context, Routes.category_details,arguments: mealsCategory);
   }
 }

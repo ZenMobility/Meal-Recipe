@@ -34,6 +34,7 @@ const String kLegalTxt = 'Legal';
 const String kSearchSubTitle ='Search your tasty food!';
 const String kSearchHintTxt = 'Search any meals, ingredient, or category';
 const String kCategoryTitle = "Category Menu";
+const String kCategoryDetailsTitle = "Category Details";
 const String kBottomNavCatTitle= "Categories";
 const String kBottomNavFavTitle= "Favorites";
 const String kBottomNavSearchTitle= "Search";
@@ -48,6 +49,7 @@ const kDark = Brightness.dark;
 const String kMealsCategories ='https://www.themealdb.com/api/json/v1/1/categories.php';
 const String kMealsRandomItem = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const String kMealsSearchByQuery = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+const String kMealsByCategoryQuery = "https://www.themealdb.com/api/json/v1/1/filter.php?c=";
 const String kDummyLicense ='https://example.com/license';
 const String kDummyPrivacyPolicy ='https://example.com/privacy-policy';
 

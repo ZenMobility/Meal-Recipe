@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:zensar_recipe_app/routes/routes.dart';
+import 'package:zensar_recipe_app/screens/category_details.dart';
 import 'package:zensar_recipe_app/screens/category_screen.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 
@@ -51,6 +52,7 @@ class HomePage extends StatelessWidget {
         routes: {
 // routes for each screen
           Routes.category: (context) => CategoryScreen(),
+          Routes.category_details: (context) => CategoryDetailsScreen(mealsCategory: ModalRoute.of(context)!.settings.arguments as dynamic),
           Routes.welcome: (context) => WelcomeScreen(),
           Routes.login: (context) => LoginScreen(),
           Routes.register: (context) => RegisterScreen(),

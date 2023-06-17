@@ -1,5 +1,6 @@
 
 
+import 'package:zensar_recipe_app/screens/category_details.dart';
 import 'package:zensar_recipe_app/screens/category_screen.dart';
 import 'package:zensar_recipe_app/screens/favorites_screen.dart';
 import 'package:zensar_recipe_app/screens/login_screen.dart';
@@ -18,4 +19,5 @@ class Routes{
   static const String settngs = SettingsScreen.id;
   static const String welcome = WelcomeScreen.id;
   static const String category = CategoryScreen.id;
+  static const String category_details = CategoryDetailsScreen.id;
 }
