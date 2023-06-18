@@ -113,11 +113,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             await _auth.signInWithEmailAndPassword(
                                 email: email, password: password);
                         {
-                          // If successful, navigate to Home Screen
+                          // If successful, navigate to Category screen
                           User? user = userCredential.user;
                           if (user != null) {
                             print('Logged in as ${user.email}');
-                            //before call to category screen fetch the api data and send it to Category screen
                             Navigator.pushNamed(context, Routes.category);
                           }
                         }

@@ -39,6 +39,11 @@ const String kBottomNavFavTitle= "Favorites";
 const String kBottomNavSearchTitle= "Search";
 const String kBottomNavSettingsTitle= "Settings";
 
+//firebase constants
+const String kAppId = "1:672370746332:android:cb90b6d9d89d776a2b6519";
+const String kAppKey = "AIzaSyA8kFwMnaNtO348jPL4xVTbgUZu-yF4ULg";
+const String kMessagingSenderId = "672370746332";
+const String kProjectId= "zensar-recipe-app";
 
 const kBrightness = Brightness.light;
 const kOrange = Colors.orange;
