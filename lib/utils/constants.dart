@@ -1,9 +1,8 @@
-// Define a constant variable to be used as decoration for text fields
 import 'package:flutter/material.dart';
 
 const String kAppTitle = "Zensar Recipe App";
 const String kWelComeScreenTitle = "Welcome to Zensar Recipe App";
-const String kWelcomeScreenSubTitle = "";//'Your new recipe cook book';
+const String kWelcomeScreenSubTitle = "";
 const String kWelcomeScreenRegister = 'Register';
 const String kWelcomeScreenRegisterAlready = 'Already registered?';
 const String kWelcomeScreenLogin = 'Login';
