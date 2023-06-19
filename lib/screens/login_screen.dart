@@ -1,27 +1,20 @@
-import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zensar_recipe_app/controler/login_controller.dart';
 import 'package:zensar_recipe_app/routes/routes.dart';
-import 'package:zensar_recipe_app/screens/category_screen.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
-import 'search_screen.dart';
-import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   static const String id = '/login_screen';
+
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-// Firebase authentication instance
-  List<dynamic>? _categorydata;
-
-  final _auth = FirebaseAuth.instance;
-  var emailController = TextEditingController();
-  var passwdController = TextEditingController();
+  final controller =  Get.put(LoginController());
   final _formKey = GlobalKey<FormState>();
 
 // Variables for user email, password and spinner visibility
@@ -52,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 // Textfield for user email input
               TextFormField(
-                controller: emailController,
+                controller: controller.emailController,
                 decoration: InputDecoration(
                   labelText: kLoginTextFieldEmail,
                   border: OutlineInputBorder(),
@@ -72,9 +65,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 },
               ),
               SizedBox(height: 16.0),
-            // Textfield for user password input
+              // Textfield for user password input
               TextFormField(
-                  controller: passwdController,
+                  controller: controller.passwdController,
                   obscureText: true,
                   decoration: InputDecoration(
                     labelText: kLoginTextFieldPassword,
@@ -106,20 +99,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           showSpinner = true;
                           errorMessage = '';
                         });
-                        var uname = emailController.text;
-                        var pwd = passwdController.text;
                         // Attempt to sign in user with email and password
                         final userCredential =
-                            await _auth.signInWithEmailAndPassword(
+                            await controller.getFirebaseInstance().signInWithEmailAndPassword(
                                 email: email, password: password);
-                        {
                           // If successful, navigate to Category screen
                           User? user = userCredential.user;
                           if (user != null) {
                             print('Logged in as ${user.email}');
                             Navigator.pushNamed(context, Routes.category);
                           }
-                        }
                         // Hide spinner
                         setState(() {
                           showSpinner = false;
@@ -132,20 +121,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (e.code == 'wrong-password') {
                           errorMessage = kLoginErrorFirbasePW;
                         } else {
-                          errorMessage =
-                              kLoginErrorFirbase;
+                          errorMessage = kLoginErrorFirbase;
                         }
                       });
                     } catch (e) {
-                    // Handle other errors
+                      // Handle other errors
                       setState(() {
                         showSpinner = false;
-                        errorMessage =
-                            kLoginErrorFirbase;
+                        errorMessage = kLoginErrorFirbase;
                       });
                     }
                   },
-                  child: Text(kLoginScreenButon,style: kLoginScreenButStyle,),
+                  child: Text(
+                    kLoginScreenButon,
+                    style: kLoginScreenButStyle,
+                  ),
                 ),
               ),
               SizedBox(height: 8.0),

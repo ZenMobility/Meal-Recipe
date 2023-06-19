@@ -52,25 +52,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
   int _selectedIndex = 0;
 
-/*
-// Method to handle bottom navigation bar item tap
-  void _onItemTapped(int index) {
-    if (index == _selectedIndex) {
-      return; // Do nothing if already on the selected screen
-    }
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    if (_selectedIndex == 0) {
-      Navigator.pushReplacementNamed(context, Routes.category);
-    } else if (_selectedIndex == 2) {
-      Navigator.pushNamed(context, Routes.favorites);
-    }else if (_selectedIndex == 3) {
-      Navigator.pushNamed(context, Routes.settngs);
-    }
-  }
-*/
 
 // Override build method, returns a Scaffold widget
   @override
@@ -144,9 +125,9 @@ class _SearchScreenState extends State<SearchScreen> {
           if (index == 0) {
             Navigator.pushReplacementNamed(context, Routes.category);
           } else if (index == 2) {
-            Navigator.pushNamed(context, Routes.favorites);
+            Navigator.pushReplacementNamed(context, Routes.favorites);
           } else if (index == 3) {
-            Navigator.pushNamed(context, Routes.settngs);
+            Navigator.pushReplacementNamed(context, Routes.settngs);
           }
         },
       ),
@@ -159,11 +140,7 @@ class _SearchScreenState extends State<SearchScreen> {
       margin: EdgeInsets.all(16.0),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(
-            context,
-            RecipeScreen.id,
-            arguments: recipe,
-          );
+          Navigator.pushNamed(context,Routes.recipe,arguments: recipe);
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

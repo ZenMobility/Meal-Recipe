@@ -144,13 +144,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                             ),
                             onTap: () async {
                               final recipe = await _getRecipe(recipeName);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      RecipeScreen(recipe: recipe),
-                                ),
-                              );
+                              Navigator.pushNamed(context,Routes.recipe,arguments: recipe);
                             },
                           ),
                         );
@@ -166,9 +160,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           if (index == 0) {
             Navigator.pushReplacementNamed(context, Routes.category);
           } else if (index == 1) {
-            Navigator.pushNamed(context, Routes.search);
+            Navigator.pushReplacementNamed(context, Routes.search);
           } else if (index == 3) {
-            Navigator.pushNamed(context, Routes.settngs);
+            Navigator.pushReplacementNamed(context, Routes.settngs);
           }
         },
       ),

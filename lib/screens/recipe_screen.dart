@@ -62,13 +62,13 @@ class _RecipeScreenState extends State<RecipeScreen> {
       _selectedIndex = index;
     });
     if (index == 0) {
-      Navigator.pushNamed(context, Routes.category);
+      Navigator.pushReplacementNamed(context, Routes.category);
     } else if (index == 1) {
-      Navigator.pushNamed(context, Routes.search);
+      Navigator.pushReplacementNamed(context, Routes.search);
     } else if (index == 2) {
-      Navigator.pushNamed(context, Routes.favorites);
+      Navigator.pushReplacementNamed(context, Routes.favorites);
     } else if (index == 3) {
-      Navigator.pushNamed(context, Routes.settngs);
+      Navigator.pushReplacementNamed(context, Routes.settngs);
     }
   }
 
@@ -132,10 +132,10 @@ class _RecipeScreenState extends State<RecipeScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(
+      /*bottomNavigationBar: CustomBottomNavigationBar(
         selectedIndex: _selectedIndex,
         onItemTapped: _onItemTapped,
-      ),
+      ),*/
     );
   }
 

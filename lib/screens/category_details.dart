@@ -96,12 +96,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                   //onTap: () => final recipe = onCategorySelect(meals),
                   onTap: () async {
                     final recipe = await onCategorySelect(meals);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => RecipeScreen(recipe: recipe),
-                      ),
-                    );
+                    Navigator.pushNamed(context,Routes.recipe,arguments: recipe);
                   },
                 );
               }).toList(),
@@ -112,7 +107,6 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
   Future<List<dynamic>> _getCategoryDetails(mealsCategory) async {
     List<dynamic> cats = [];
     _isLoading = true;
-//www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
     final url = kMealsByCategoryQuery + '${mealsCategory}';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -126,25 +120,6 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
     }
     return cats;
   }
-
-  /*Future onCategorySelect(meals) async{
-      List<dynamic> cats = [];
-      _isLoading = true;
-      final url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="+ '${meals['idMeal']}';
-      final response = await http.get(Uri.parse(url));
-
-      if (response.statusCode == 200) {
-        setState(() {
-          _isLoading = false;
-          final data  = json.decode(response.body)['meals'];
-
-        });
-        Navigator.pushNamed(context, Routes.recipe,arguments:  data['meals'][0]);
-      } else {
-        _isLoading = false;
-        throw Exception('Failed to search recipes');
-      }
-    }*/
   Future<dynamic> onCategorySelect(meals) async {
     final url = kMealsSearchByQuery + '${meals['strMeal']}';
     /*final url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" +

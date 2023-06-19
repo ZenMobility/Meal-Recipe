@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:zensar_recipe_app/components/navbar.dart';
+import 'package:zensar_recipe_app/screens/category_details.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -98,11 +99,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
           selectedIndex: 0,
           onItemTapped: (index) {
              if (index == 1) {
-              Navigator.pushNamed(context, Routes.search);
+              Navigator.pushReplacementNamed(context, Routes.search);
             } else if (index == 2) {
-              Navigator.pushNamed(context, Routes.favorites);
+              Navigator.pushReplacementNamed(context, Routes.favorites);
             } else if (index == 3) {
-              Navigator.pushNamed(context, Routes.settngs);
+              Navigator.pushReplacementNamed(context, Routes.settngs);
             }
           },
         ));
@@ -125,6 +126,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
   }
 
   onCategorySelect(mealsCategory) {
-    Navigator.pushNamed(context, Routes.category_details,arguments: mealsCategory);
+    Navigator.pushNamed(context,Routes.category_details,arguments: mealsCategory);
   }
 }
