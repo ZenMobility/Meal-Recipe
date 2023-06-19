@@ -8,9 +8,11 @@ import 'package:zensar_recipe_app/screens/recipe_screen.dart';
 import 'package:zensar_recipe_app/screens/register_screen.dart';
 import 'package:zensar_recipe_app/screens/search_screen.dart';
 import 'package:zensar_recipe_app/screens/settings_screen.dart';
+import 'package:zensar_recipe_app/screens/splash_screen.dart';
 import 'package:zensar_recipe_app/screens/welcome_screen.dart';
 
 class Routes{
+  static const String splash_screen = SplashScreen.id;
   static const String favorites = FavoritesScreen.id;
   static const String login = LoginScreen.id;
   static const String recipe = RecipeScreen.id;

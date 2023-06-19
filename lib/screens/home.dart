@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:zensar_recipe_app/routes/routes.dart';
 import 'package:zensar_recipe_app/screens/category_details.dart';
 import 'package:zensar_recipe_app/screens/category_screen.dart';
+import 'package:zensar_recipe_app/screens/splash_screen.dart';
 import 'package:zensar_recipe_app/utils/constants.dart';
 
 import 'favorites_screen.dart';
@@ -42,15 +44,16 @@ class HomePage extends StatelessWidget {
       ),
       initial: AdaptiveThemeMode.light,
       // Setting the initial theme mode to light
-      builder: (theme, darkTheme) => MaterialApp(
+      builder: (theme, darkTheme) => GetMaterialApp(
         title: kAppTitle,
         theme: theme,
         darkTheme: darkTheme,
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.welcome,
+        initialRoute: Routes.splash_screen,
         // Setting the initial route to the welcome screen
         routes: {
 // routes for each screen
+          Routes.splash_screen: (context) => SplashScreen(),
           Routes.category: (context) => CategoryScreen(),
           Routes.category_details: (context) => CategoryDetailsScreen(mealsCategory: ModalRoute.of(context)!.settings.arguments as dynamic),
           Routes.welcome: (context) => WelcomeScreen(),

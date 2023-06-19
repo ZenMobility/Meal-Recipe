@@ -38,6 +38,7 @@ const String kBottomNavCatTitle= "Categories";
 const String kBottomNavFavTitle= "Favorites";
 const String kBottomNavSearchTitle= "Search";
 const String kBottomNavSettingsTitle= "Settings";
+const String kSplashText= "Zensar Recipe App";
 
 //firebase constants
 const String kAppId = "1:672370746332:android:cb90b6d9d89d776a2b6519";
