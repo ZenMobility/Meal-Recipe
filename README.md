@@ -10,6 +10,7 @@ A Meals Recipe app which will allow user to traverse though list of menus items 
 - Settings screen
 - Detailed Meal Recipe screen.
 - look up the meals recipe by category
+- implemeted GetX for some screens for state managment.
 
 ## Screen Shots
 
